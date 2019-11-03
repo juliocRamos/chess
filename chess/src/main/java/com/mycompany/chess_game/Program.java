@@ -1,8 +1,10 @@
 package com.mycompany.chess_game;
 
+import com.mycompany.chess_game.boardgame.Posicao;
+
 
 public class Program {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Posicao pos = new Posicao(3, 5);
     }
 }
