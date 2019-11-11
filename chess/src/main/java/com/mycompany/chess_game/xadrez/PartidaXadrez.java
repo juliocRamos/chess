@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.chess_game.xadrez;
 
 import com.mycompany.chess_game.boardgame.Posicao;
@@ -10,10 +5,6 @@ import com.mycompany.chess_game.boardgame.Tabuleiro;
 import com.mycompany.chess_game.xadrez.pecas.Rei;
 import com.mycompany.chess_game.xadrez.pecas.Torre;
 
-/**
- *
- * @author Julio-Ramos
- */
 public class PartidaXadrez {
 
     private Tabuleiro tabuleiro;
@@ -32,10 +23,11 @@ public class PartidaXadrez {
         }
         return matriz;
     }
-    
+
     //Inicia a partida, colocando as peças
-    private void setupInicial(){
-        tabuleiro.adicionarPeca(new Torre(CorPeca.WHITE, tabuleiro), new Posicao(2,1));
-        tabuleiro.adicionarPeca(new Rei(CorPeca.BLACK, tabuleiro), new Posicao(0,4));
+    private void setupInicial() {
+        tabuleiro.adicionarPeca(new Torre(CorPeca.WHITE, tabuleiro), new Posicao(9, 1));
+        tabuleiro.adicionarPeca(new Torre(CorPeca.WHITE, tabuleiro), new Posicao(2, 1));
+        tabuleiro.adicionarPeca(new Rei(CorPeca.BLACK, tabuleiro), new Posicao(0, 4));
     }
 }
