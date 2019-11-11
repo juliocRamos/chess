@@ -1,6 +1,5 @@
 package com.mycompany.chess_game.xadrez;
 
-import com.mycompany.chess_game.boardgame.Posicao;
 import com.mycompany.chess_game.boardgame.Tabuleiro;
 import com.mycompany.chess_game.xadrez.pecas.Rei;
 import com.mycompany.chess_game.xadrez.pecas.Torre;
@@ -15,7 +14,9 @@ public class PartidaXadrez {
     }
 
     public PecaXadrez[][] getPecas() {
-        PecaXadrez[][] matriz = new PecaXadrez[tabuleiro.getLinhas()][tabuleiro.getLinhas()];
+        PecaXadrez[][] matriz
+                = new PecaXadrez[tabuleiro.getLinhas()][tabuleiro.getLinhas()];
+
         for (int i = 0; i < tabuleiro.getColunas(); i++) {
             for (int j = 0; j < tabuleiro.getLinhas(); j++) {
                 matriz[i][j] = (PecaXadrez) tabuleiro.peca(i, j);
@@ -24,10 +25,15 @@ public class PartidaXadrez {
         return matriz;
     }
 
+    private void adicionarNovaPeca(char coluna, int linha, PecaXadrez peca) {
+        tabuleiro.adicionarPeca(peca,
+                new PosicaoXadrez(coluna, linha).toPosition());
+    }
+
     //Inicia a partida, colocando as peças
     private void setupInicial() {
-        tabuleiro.adicionarPeca(new Torre(CorPeca.WHITE, tabuleiro), new Posicao(9, 1));
-        tabuleiro.adicionarPeca(new Torre(CorPeca.WHITE, tabuleiro), new Posicao(2, 1));
-        tabuleiro.adicionarPeca(new Rei(CorPeca.BLACK, tabuleiro), new Posicao(0, 4));
+        adicionarNovaPeca('b', 6, new Rei(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('a', 6, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('c', 6, new Rei(CorPeca.BLACK, tabuleiro));
     }
 }
