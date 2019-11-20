@@ -1,4 +1,4 @@
-package com.mycompany.chess_game.boardgame.exceptions;
+package jogo_xadrez.boardgame.exceptions;
 
 public class TabuleiroException extends RuntimeException {
 

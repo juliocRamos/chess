@@ -60,9 +60,14 @@ public class UserInterface {
             int linha = Integer.parseInt(s.substring(1));
 
             return new PosicaoXadrez(coluna, linha);
-            
+
         } catch (Exception ex) {
             throw new InputMismatchException("Erro ao ler a posição do xadrez");
         }
+    }
+
+    public static void limparInterface() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

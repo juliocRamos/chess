@@ -1,6 +1,6 @@
 package jogo_xadrez.xadrez.exceptions;
 
-import com.mycompany.chess_game.boardgame.exceptions.TabuleiroException;
+import jogo_xadrez.boardgame.exceptions.TabuleiroException;
 
 public class XadrezException extends TabuleiroException {
 

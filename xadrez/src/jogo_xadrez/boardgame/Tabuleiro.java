@@ -1,7 +1,6 @@
 package jogo_xadrez.boardgame;
 
-import com.mycompany.chess_game.boardgame.Posicao;
-import com.mycompany.chess_game.boardgame.exceptions.TabuleiroException;
+import jogo_xadrez.boardgame.exceptions.TabuleiroException;
 
 public class Tabuleiro {
 

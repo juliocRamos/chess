@@ -1,7 +1,5 @@
 package jogo_xadrez.boardgame;
 
-import com.mycompany.chess_game.boardgame.Posicao;
-
 public class Peca {
 
     protected Posicao posicao;

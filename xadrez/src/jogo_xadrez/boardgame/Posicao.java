@@ -1,4 +1,4 @@
-package com.mycompany.chess_game.boardgame;
+package jogo_xadrez.boardgame;
 
 public class Posicao {
 

@@ -1,7 +1,7 @@
 package jogo_xadrez.xadrez;
 
-import com.mycompany.chess_game.boardgame.Posicao;
 import jogo_xadrez.boardgame.Peca;
+import jogo_xadrez.boardgame.Posicao;
 import jogo_xadrez.boardgame.Tabuleiro;
 import jogo_xadrez.xadrez.exceptions.XadrezException;
 import jogo_xadrez.xadrez.pecas.Rei;
