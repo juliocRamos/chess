@@ -1,7 +1,7 @@
-package com.mycompany.chess_game.xadrez;
+package jogo_xadrez.xadrez;
 
 import com.mycompany.chess_game.boardgame.Posicao;
-import com.mycompany.chess_game.xadrez.exceptions.XadrezException;
+import jogo_xadrez.xadrez.exceptions.XadrezException;
 
 public class PosicaoXadrez {
 

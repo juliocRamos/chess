@@ -1,4 +1,6 @@
-package com.mycompany.chess_game.boardgame;
+package jogo_xadrez.boardgame;
+
+import com.mycompany.chess_game.boardgame.Posicao;
 
 public class Peca {
 

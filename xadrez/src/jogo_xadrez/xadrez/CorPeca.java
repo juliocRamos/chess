@@ -1,4 +1,4 @@
-package com.mycompany.chess_game.xadrez;
+package jogo_xadrez.xadrez;
 
 public enum CorPeca {
     BLACK,

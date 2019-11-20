@@ -1,7 +1,8 @@
-package com.mycompany.chess_game.xadrez;
+package jogo_xadrez.xadrez;
 
-import com.mycompany.chess_game.boardgame.Peca;
-import com.mycompany.chess_game.boardgame.Tabuleiro;
+
+import jogo_xadrez.boardgame.Peca;
+import jogo_xadrez.boardgame.Tabuleiro;
 
 public class PecaXadrez extends Peca {
 

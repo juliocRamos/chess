@@ -1,5 +1,6 @@
-package com.mycompany.chess_game.boardgame;
+package jogo_xadrez.boardgame;
 
+import com.mycompany.chess_game.boardgame.Posicao;
 import com.mycompany.chess_game.boardgame.exceptions.TabuleiroException;
 
 public class Tabuleiro {
@@ -66,5 +67,22 @@ public class Tabuleiro {
             throw new TabuleiroException("Posicao não existe no tabuleiro!");
         }
         return peca(posicao) != null;
+    }
+
+    // Remove a peça do tabuleiro
+    public Peca removerPeca(Posicao posicao) {
+        if (!posicaoExiste(posicao)) {
+            throw new TabuleiroException("A posiçãoo não é válida no tabuleiro");
+        }
+
+        if (peca(posicao) == null) {
+            return null;
+        }
+
+        Peca aux = peca(posicao);
+        aux.posicao = null;
+
+        pecas[posicao.getLinha()][posicao.getColuna()] = null;
+        return aux;
     }
 }

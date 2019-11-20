@@ -1,8 +1,8 @@
-package com.mycompany.chess_game.xadrez.pecas;
+package jogo_xadrez.xadrez.pecas;
 
-import com.mycompany.chess_game.boardgame.Tabuleiro;
-import com.mycompany.chess_game.xadrez.CorPeca;
-import com.mycompany.chess_game.xadrez.PecaXadrez;
+import jogo_xadrez.boardgame.Tabuleiro;
+import jogo_xadrez.xadrez.CorPeca;
+import jogo_xadrez.xadrez.PecaXadrez;
 
 public class Torre extends PecaXadrez {
 

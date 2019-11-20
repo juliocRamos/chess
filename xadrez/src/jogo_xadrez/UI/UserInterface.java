@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mycompany.chess_game.UI;
+package jogo_xadrez.UI;
 
-import com.mycompany.chess_game.xadrez.CorPeca;
-import com.mycompany.chess_game.xadrez.PecaXadrez;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import jogo_xadrez.xadrez.CorPeca;
+import jogo_xadrez.xadrez.PecaXadrez;
+import jogo_xadrez.xadrez.PosicaoXadrez;
 
-/**
- *
- * @author Julio-Ramos
- */
+//Classe que define as funcionalidades da interface com o usuário
 public class UserInterface {
 
     //Definição de cores
@@ -56,5 +51,18 @@ public class UserInterface {
             }
         }
         System.out.print(" ");
+    }
+
+    public static PosicaoXadrez lerPosicaoUsuario(Scanner sc) {
+        try {
+            String s = sc.nextLine();
+            char coluna = s.charAt(0);
+            int linha = Integer.parseInt(s.substring(1));
+
+            return new PosicaoXadrez(coluna, linha);
+            
+        } catch (Exception ex) {
+            throw new InputMismatchException("Erro ao ler a posição do xadrez");
+        }
     }
 }

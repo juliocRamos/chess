@@ -1,8 +1,11 @@
-package com.mycompany.chess_game.xadrez;
+package jogo_xadrez.xadrez;
 
-import com.mycompany.chess_game.boardgame.Tabuleiro;
-import com.mycompany.chess_game.xadrez.pecas.Rei;
-import com.mycompany.chess_game.xadrez.pecas.Torre;
+import com.mycompany.chess_game.boardgame.Posicao;
+import jogo_xadrez.boardgame.Peca;
+import jogo_xadrez.boardgame.Tabuleiro;
+import jogo_xadrez.xadrez.exceptions.XadrezException;
+import jogo_xadrez.xadrez.pecas.Rei;
+import jogo_xadrez.xadrez.pecas.Torre;
 
 public class PartidaXadrez {
 
@@ -28,6 +31,29 @@ public class PartidaXadrez {
     private void adicionarNovaPeca(char coluna, int linha, PecaXadrez peca) {
         tabuleiro.adicionarPeca(peca,
                 new PosicaoXadrez(coluna, linha).toPosition());
+    }
+
+    public PecaXadrez moverPeca(PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino) {
+        Posicao origem = posicaoOrigem.toPosition();
+        Posicao destino = posicaoDestino.toPosition();
+
+        validarPosicaoOrigem(origem);
+        Peca pecaCapturada = fazerMovimento(origem, destino);
+        return (PecaXadrez) pecaCapturada;
+    }
+
+    public void validarPosicaoOrigem(Posicao posicao) {
+        if (!tabuleiro.existeUmaPeca(posicao)) {
+            throw new XadrezException("Não existe uma peça na posição informada");
+        }
+    }
+
+    public Peca fazerMovimento(Posicao origem, Posicao destino) {
+        Peca p = tabuleiro.removerPeca(origem);
+        Peca pecaCapturada = tabuleiro.removerPeca(destino);
+
+        tabuleiro.adicionarPeca(p, destino);
+        return (PecaXadrez) pecaCapturada;
     }
 
     //Inicia a partida, colocando as peças
