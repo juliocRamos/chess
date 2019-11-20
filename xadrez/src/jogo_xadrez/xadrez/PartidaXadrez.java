@@ -32,8 +32,18 @@ public class PartidaXadrez {
 
     //Inicia a partida, colocando as peças
     private void setupInicial() {
-        adicionarNovaPeca('b', 6, new Rei(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('a', 6, new Torre(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('c', 6, new Rei(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('c', 7, new Rei(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('c', 8, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('d', 7, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('e', 7, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('e', 8, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('d', 8, new Torre(CorPeca.WHITE, tabuleiro));
+
+        adicionarNovaPeca('c', 2, new Rei(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('d', 2, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('e', 2, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('e', 1, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('d', 1, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('a', 3, new Torre(CorPeca.BLACK, tabuleiro));
     }
 }
