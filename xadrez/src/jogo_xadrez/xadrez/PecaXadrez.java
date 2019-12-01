@@ -4,7 +4,7 @@ package jogo_xadrez.xadrez;
 import jogo_xadrez.boardgame.Peca;
 import jogo_xadrez.boardgame.Tabuleiro;
 
-public class PecaXadrez extends Peca {
+public abstract class PecaXadrez extends Peca {
 
     private CorPeca cor;
 
