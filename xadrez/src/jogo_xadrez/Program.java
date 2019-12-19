@@ -17,10 +17,17 @@ public class Program {
         while (true) {
             try {
                 UserInterface.limparInterface();
-                UserInterface.printBoard(partida.getPecas());
+                UserInterface.printTabuleiro(partida.getPecas());
                 System.out.println();
                 System.err.print("Origem: ");
                 PosicaoXadrez origem = UserInterface.lerPosicaoUsuario(sc);
+
+                boolean[][] movimentosPossiveis
+                        = partida.movimentosPossiveis(origem);
+                UserInterface.limparInterface();
+                UserInterface.printTabuleiro(partida.getPecas(),
+                        movimentosPossiveis);
+
                 System.out.println();
                 System.out.print("Destino: ");
                 PosicaoXadrez destino = UserInterface.lerPosicaoUsuario(sc);
