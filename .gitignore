@@ -23,4 +23,5 @@
 hs_err_pid*
 /chess_game/target/
 /chess/target/
-/chess/xadrez/nbproject/private/
+/xadrez/build/
+/xadrez/nbproject/private/

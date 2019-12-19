@@ -52,8 +52,7 @@ public class Tabuleiro {
 
     // Verifica se é uma posicao válida
     public boolean posicaoExiste(int linha, int coluna) {
-        return (((linha >= 0) && (linha <= this.linhas))
-                && (coluna >= 0 && (coluna < this.colunas)));
+        return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
     }
 
     public boolean posicaoExiste(Posicao posicao) {
