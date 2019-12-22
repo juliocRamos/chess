@@ -4,6 +4,7 @@ import jogo_xadrez.boardgame.Peca;
 import jogo_xadrez.boardgame.Posicao;
 import jogo_xadrez.boardgame.Tabuleiro;
 import jogo_xadrez.xadrez.exceptions.XadrezException;
+import jogo_xadrez.xadrez.pecas.Bispo;
 import jogo_xadrez.xadrez.pecas.Peao;
 import jogo_xadrez.xadrez.pecas.Rei;
 import jogo_xadrez.xadrez.pecas.Torre;
@@ -77,6 +78,12 @@ public class PartidaXadrez {
 
     //Inicia a partida, colocando as peças
     private void setupInicial() {
+        adicionarNovaPeca('a', 1, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('e', 1, new Rei(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('h', 1, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('c', 1, new Bispo(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('f', 1, new Bispo(CorPeca.WHITE, tabuleiro));
+
         adicionarNovaPeca('a', 2, new Peao(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('b', 2, new Peao(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('c', 2, new Peao(CorPeca.WHITE, tabuleiro));
@@ -86,9 +93,11 @@ public class PartidaXadrez {
         adicionarNovaPeca('g', 2, new Peao(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('h', 2, new Peao(CorPeca.WHITE, tabuleiro));
 
-        adicionarNovaPeca('a', 1, new Torre(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('e', 1, new Rei(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('h', 1, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('a', 8, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('e', 8, new Rei(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('h', 8, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('c', 8, new Bispo(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('f', 8, new Bispo(CorPeca.BLACK, tabuleiro));
 
         adicionarNovaPeca('a', 7, new Peao(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('b', 7, new Peao(CorPeca.BLACK, tabuleiro));
@@ -98,10 +107,6 @@ public class PartidaXadrez {
         adicionarNovaPeca('f', 7, new Peao(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('g', 7, new Peao(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('h', 7, new Peao(CorPeca.BLACK, tabuleiro));
-
-        adicionarNovaPeca('a', 8, new Torre(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('e', 8, new Rei(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('h', 8, new Torre(CorPeca.BLACK, tabuleiro));
 
     }
 }
