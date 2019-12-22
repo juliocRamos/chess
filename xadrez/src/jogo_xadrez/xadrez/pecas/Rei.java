@@ -73,9 +73,4 @@ public class Rei extends PecaXadrez {
 
         return matTmp;
     }
-
-    public boolean podeSerMovido(Posicao posicao) {
-        PecaXadrez auxP = (PecaXadrez) getTabuleiro().peca(posicao);
-        return auxP == null || auxP.getCor() != getCor();
-    }
 }
