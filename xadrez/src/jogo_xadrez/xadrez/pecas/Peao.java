@@ -14,7 +14,7 @@ public class Peao extends PecaXadrez {
     @Override
     public boolean[][] movimentosPossiveis() {
 
-        boolean[][] matTmp
+        boolean[][] matAux
                 = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 
         Posicao auxP = new Posicao(0, 0);
@@ -23,8 +23,9 @@ public class Peao extends PecaXadrez {
         if (getCor() == CorPeca.WHITE) {
             auxP.setValores(posicao.getLinha() - 1, posicao.getColuna());
 
-            if (getTabuleiro().posicaoExiste(auxP) && !getTabuleiro().existeUmaPeca(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+            if (getTabuleiro().posicaoExiste(auxP)
+                    && !getTabuleiro().existeUmaPeca(auxP)) {
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Primeiro movimento (acima)... pode mover duas casas
@@ -32,28 +33,30 @@ public class Peao extends PecaXadrez {
             Posicao auxP2
                     = new Posicao(posicao.getLinha() - 1, posicao.getColuna());
 
-            if ((getTabuleiro().posicaoExiste(auxP) && !getTabuleiro().existeUmaPeca(auxP))
-                    && (getTabuleiro().posicaoExiste(auxP2) && !getTabuleiro().existeUmaPeca(auxP2))
+            if ((getTabuleiro().posicaoExiste(auxP)
+                    && !getTabuleiro().existeUmaPeca(auxP))
+                    && (getTabuleiro().posicaoExiste(auxP2)
+                    && !getTabuleiro().existeUmaPeca(auxP2))
                     && getContadorMovimentos() == 0) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Diagonal esquerda Superior (Noroeste)
             auxP.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
             if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Diagonal direita Superior (Nordeste)
             auxP.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
             if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
         } else {
             auxP.setValores(posicao.getLinha() + 1, posicao.getColuna());
             if (getTabuleiro().posicaoExiste(auxP)
                     && !getTabuleiro().existeUmaPeca(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Primeiro movimento (acima)... pode mover duas casas
@@ -66,22 +69,22 @@ public class Peao extends PecaXadrez {
                     && (getTabuleiro().posicaoExiste(auxP2)
                     && !getTabuleiro().existeUmaPeca(auxP2))
                     && getContadorMovimentos() == 0) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Diagonal esquerda Superior (Noroeste)
             auxP.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
             if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
 
             // Diagonal direita Superior (Nordeste)
             auxP.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
             if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
-                matTmp[auxP.getLinha()][auxP.getColuna()] = true;
+                matAux[auxP.getLinha()][auxP.getColuna()] = true;
             }
         }
-        return matTmp;
+        return matAux;
     }
 
     @Override

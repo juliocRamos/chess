@@ -13,6 +13,7 @@ public class Bispo extends PecaXadrez {
 
     @Override
     public boolean[][] movimentosPossiveis() {
+
         boolean[][] matAux
                 = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 

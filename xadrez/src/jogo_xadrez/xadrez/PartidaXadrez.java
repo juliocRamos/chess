@@ -7,6 +7,7 @@ import jogo_xadrez.xadrez.exceptions.XadrezException;
 import jogo_xadrez.xadrez.pecas.Bispo;
 import jogo_xadrez.xadrez.pecas.Cavalo;
 import jogo_xadrez.xadrez.pecas.Peao;
+import jogo_xadrez.xadrez.pecas.Rainha;
 import jogo_xadrez.xadrez.pecas.Rei;
 import jogo_xadrez.xadrez.pecas.Torre;
 
@@ -81,6 +82,7 @@ public class PartidaXadrez {
     private void setupInicial() {
         adicionarNovaPeca('a', 1, new Torre(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('e', 1, new Rei(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('d', 1, new Rainha(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('h', 1, new Torre(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('c', 1, new Bispo(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('f', 1, new Bispo(CorPeca.WHITE, tabuleiro));
@@ -98,6 +100,7 @@ public class PartidaXadrez {
 
         adicionarNovaPeca('a', 8, new Torre(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('e', 8, new Rei(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('d', 8, new Rainha(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('h', 8, new Torre(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('c', 8, new Bispo(CorPeca.BLACK, tabuleiro));
         adicionarNovaPeca('f', 8, new Bispo(CorPeca.BLACK, tabuleiro));

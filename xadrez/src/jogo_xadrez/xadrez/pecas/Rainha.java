@@ -5,15 +5,14 @@ import jogo_xadrez.boardgame.Tabuleiro;
 import jogo_xadrez.xadrez.CorPeca;
 import jogo_xadrez.xadrez.PecaXadrez;
 
-public class Torre extends PecaXadrez {
+public class Rainha extends PecaXadrez {
 
-    public Torre(CorPeca cor, Tabuleiro tabuleiro) {
+    public Rainha(CorPeca cor, Tabuleiro tabuleiro) {
         super(cor, tabuleiro);
     }
 
     @Override
     public boolean[][] movimentosPossiveis() {
-
         boolean[][] matAux
                 = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 
@@ -63,11 +62,55 @@ public class Torre extends PecaXadrez {
             matAux[auxP.getLinha()][auxP.getColuna()] = true;
         }
 
+        // Noroeste
+        auxP.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
+        while (getTabuleiro().posicaoExiste(auxP)
+                && !getTabuleiro().existeUmaPeca(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+            auxP.setValores(auxP.getLinha() - 1, auxP.getColuna() - 1);
+        }
+        if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+        }
+
+        // Nordeste
+        auxP.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
+        while (getTabuleiro().posicaoExiste(auxP)
+                && !getTabuleiro().existeUmaPeca(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+            auxP.setValores(auxP.getLinha() - 1, auxP.getColuna() + 1);
+        }
+        if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+        }
+
+        // Sudeste
+        auxP.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
+        while (getTabuleiro().posicaoExiste(auxP)
+                && !getTabuleiro().existeUmaPeca(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+            auxP.setValores(auxP.getLinha() + 1, auxP.getColuna() + 1);
+        }
+        if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+        }
+
+        // Sudoeste
+        auxP.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
+        while (getTabuleiro().posicaoExiste(auxP)
+                && !getTabuleiro().existeUmaPeca(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+            auxP.setValores(auxP.getLinha() + 1, auxP.getColuna() - 1);
+        }
+        if (getTabuleiro().posicaoExiste(auxP) && existePrecaInimiga(auxP)) {
+            matAux[auxP.getLinha()][auxP.getColuna()] = true;
+        }
+
         return matAux;
     }
 
     @Override
     public String toString() {
-        return "T";
+        return "R";
     }
 }
