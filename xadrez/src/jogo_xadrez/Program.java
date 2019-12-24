@@ -17,7 +17,7 @@ public class Program {
         while (true) {
             try {
                 UserInterface.limparInterface();
-                UserInterface.printTabuleiro(partida.getPecas());
+                UserInterface.printPartida(partida);
                 System.out.println();
                 System.err.print("Origem: ");
                 PosicaoXadrez origem = UserInterface.lerPosicaoUsuario(sc);
@@ -31,8 +31,7 @@ public class Program {
                 System.out.println();
                 System.out.print("Destino: ");
                 PosicaoXadrez destino = UserInterface.lerPosicaoUsuario(sc);
-
-                PecaXadrez pecaMovimentada = partida.moverPeca(origem, destino);
+                partida.moverPeca(origem, destino);
 
             } catch (XadrezException ex) {
                 System.out.println(ex.getMessage());

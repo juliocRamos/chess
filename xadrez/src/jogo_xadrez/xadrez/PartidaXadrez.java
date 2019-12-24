@@ -15,9 +15,23 @@ public class PartidaXadrez {
 
     private Tabuleiro tabuleiro;
 
+    private int turno;
+
+    private CorPeca jogadorAtual;
+
     public PartidaXadrez() {
-        this.tabuleiro = new Tabuleiro(8, 8);
-        this.setupInicial();
+        tabuleiro = new Tabuleiro(8, 8);
+        jogadorAtual = CorPeca.WHITE;
+        turno = 1;
+        setupInicial();
+    }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public CorPeca getJogadorAtual() {
+        return jogadorAtual;
     }
 
     public PecaXadrez[][] getPecas() {
@@ -44,12 +58,17 @@ public class PartidaXadrez {
         validarPosicaoOrigem(origem);
         validarPosicaoDestino(origem, destino);
         Peca pecaCapturada = fazerMovimento(origem, destino);
+        proximoTurno();
         return (PecaXadrez) pecaCapturada;
     }
 
     private void validarPosicaoOrigem(Posicao posicao) {
         if (!tabuleiro.existeUmaPeca(posicao)) {
             throw new XadrezException("Não existe uma peça na posição informada");
+        } else if (jogadorAtual != ((PecaXadrez) tabuleiro.peca(posicao))
+                .getCor()) {
+            throw new XadrezException("A peça escolhida não é sua!");
+
         } else if (!this.tabuleiro.peca(posicao).existemMovimentosPossiveis()) {
             throw new XadrezException("Não existem movimentos possíveis "
                     + "para a peça escolhida.");
@@ -58,7 +77,8 @@ public class PartidaXadrez {
 
     private void validarPosicaoDestino(Posicao origem, Posicao destino) {
         if (!tabuleiro.peca(origem).movimentoPossivel(destino)) {
-            throw new XadrezException("A peça escolhida não pode se mover para a posição de destino");
+            throw new XadrezException("A peça escolhida não pode se "
+                    + "mover para a posição de destino");
         }
     }
 
@@ -76,6 +96,13 @@ public class PartidaXadrez {
         validarPosicaoOrigem(posicao);
 
         return tabuleiro.peca(posicao).movimentosPossiveis();
+    }
+
+    private void proximoTurno() {
+        turno++;
+        jogadorAtual = (jogadorAtual == CorPeca.WHITE)
+                ? CorPeca.BLACK
+                : CorPeca.WHITE;
     }
 
     //Inicia a partida, colocando as peças
