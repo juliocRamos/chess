@@ -65,6 +65,10 @@ public class UserInterface {
         System.out.println("Turno: " + partida.getTurno());
         System.out.println("Esperando a jogada do jogador: "
                 + partida.getJogadorAtual());
+
+        if (partida.isInCheck()) {
+            System.out.println("CHECK!");
+        }
     }
 
     private static void printPeca(PecaXadrez peca, boolean setBackgroundColor) {

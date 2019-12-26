@@ -40,4 +40,8 @@ public abstract class PecaXadrez extends Peca {
     public int getContadorMovimentos() {
         return contadorMovimentos;
     }
+    
+    public PosicaoXadrez getPosicaoXadrez(){
+        return PosicaoXadrez.fromPosicao(posicao);
+    }
 }

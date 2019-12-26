@@ -27,10 +27,11 @@ public class PosicaoXadrez {
     }
     
     /**
-     * Formula da coluna = coluna_xadrez - 'a' (unicode)
-     *     Ex: 'a' - 'a' = 0
-     *         'b' - 'a' = 1
-     *         ...Formula da linha = 8 - linha_xadrez
+     * Formula da coluna = 'a' (unicode) + coluna_xadrez
+     *     Ex: 'a' + 'a' = 0
+     *         'b' + 'a' = 1
+     *         ...
+     * Formula da linha = 8 - linha_xadrez
      *
      * @return
      */
@@ -38,8 +39,8 @@ public class PosicaoXadrez {
         return new Posicao(8 - this.linha, this.coluna - 'a');
     }
     
-    protected static PosicaoXadrez fromPosition(Posicao posicao){
-     return new PosicaoXadrez((char)('a' - posicao.getColuna()),
+    protected static PosicaoXadrez fromPosicao(Posicao posicao){
+     return new PosicaoXadrez((char)('a' + posicao.getColuna()),
         8 - posicao.getLinha());
     }
 
