@@ -63,11 +63,16 @@ public class UserInterface {
         printarPecasCapturadas(pecasCapturadas);
         System.out.println();
         System.out.println("Turno: " + partida.getTurno());
-        System.out.println("Esperando a jogada do jogador: "
-                + partida.getJogadorAtual());
+        if (!partida.isXequeMate()) {
+            System.out.println("Esperando a jogada do jogador: "
+                    + partida.getJogadorAtual());
 
-        if (partida.isInCheck()) {
-            System.out.println("CHECK!");
+            if (partida.isInXeque()) {
+                System.out.println("Xeque!");
+            }
+        } else {
+            System.out.println("Xeque-Mate!");
+            System.out.println("Vencedor: " + partida.getJogadorAtual());
         }
     }
 

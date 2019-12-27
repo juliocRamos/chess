@@ -26,7 +26,9 @@ public class PartidaXadrez {
 
     private List<Peca> pecasCapturadas = new ArrayList<>();
 
-    private boolean inCheck;
+    private boolean inXeque;
+
+    private boolean xequeMate;
 
     public PartidaXadrez() {
         tabuleiro = new Tabuleiro(8, 8);
@@ -70,13 +72,18 @@ public class PartidaXadrez {
         validarPosicaoDestino(origem, destino);
         Peca pecaCapturada = fazerMovimento(origem, destino);
 
-        if (isReiEmCheck(jogadorAtual)) {
+        if (isReiEmXeque(jogadorAtual)) {
             desfazerMovimento(origem, destino, pecaCapturada);
-            throw new XadrezException("Você não pode se colocar em Check!");
+            throw new XadrezException("Você não pode se colocar em Xeque!");
         }
 
-        inCheck = (isReiEmCheck(getCorOponente(jogadorAtual)));
-        proximoTurno();
+        inXeque = (isReiEmXeque(getCorOponente(jogadorAtual)));
+        if (isReiEmXequeMate(getCorOponente(jogadorAtual))) {
+            xequeMate = true;
+        } else {
+            proximoTurno();
+        }
+
         return (PecaXadrez) pecaCapturada;
     }
 
@@ -164,7 +171,7 @@ public class PartidaXadrez {
      Percorro todas as peças adversárias testando se algum dos movimentos 
      possíveis ameaça o Rei do oponente.
      */
-    public boolean isReiEmCheck(CorPeca cor) {
+    public boolean isReiEmXeque(CorPeca cor) {
         Posicao posicaoRei = getRei(cor).getPosicaoXadrez().toPosicao();
 
         List<Peca> pecasInimigas = this.pecasNoTabuleiro.stream()
@@ -181,47 +188,88 @@ public class PartidaXadrez {
         return false;
     }
 
-    public boolean isInCheck() {
-        return inCheck;
+    public boolean isReiEmXequeMate(CorPeca cor) {
+        if (!isReiEmXeque(cor)) {
+            return false;
+        }
+
+        List<Peca> listaPecas = this.pecasNoTabuleiro.stream()
+                .filter(x -> ((PecaXadrez) x).getCor() == cor)
+                .collect(Collectors.toList());
+
+        for (Peca p : listaPecas) {
+            final boolean[][] mat = ((PecaXadrez) p).movimentosPossiveis();
+            for (int i = 0; i < tabuleiro.getLinhas(); i++) {
+                for (int j = 0; j < tabuleiro.getColunas(); j++) {
+                    if (mat[i][j]) {
+                        Posicao origem = ((PecaXadrez) p).getPosicaoXadrez()
+                                .toPosicao();
+
+                        Posicao destino = new Posicao(i, j);
+                        Peca pecaCapturada = fazerMovimento(origem, destino);
+                        boolean testeXeque = isReiEmXeque(cor);
+                        desfazerMovimento(origem, destino, pecaCapturada);
+                        if (!testeXeque) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isInXeque() {
+        return inXeque;
+    }
+
+    public boolean isXequeMate() {
+        return xequeMate;
     }
 
     //Inicia a partida, colocando as peças
     private void setupInicial() {
-        adicionarNovaPeca('a', 1, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('h', 7, new Torre(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('d', 1, new Torre(CorPeca.WHITE, tabuleiro));
         adicionarNovaPeca('e', 1, new Rei(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('d', 1, new Rainha(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('h', 1, new Torre(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('c', 1, new Bispo(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('f', 1, new Bispo(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('b', 1, new Cavalo(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('g', 1, new Cavalo(CorPeca.WHITE, tabuleiro));
 
-        adicionarNovaPeca('a', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('b', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('c', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('d', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('e', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('f', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('g', 2, new Peao(CorPeca.WHITE, tabuleiro));
-        adicionarNovaPeca('h', 2, new Peao(CorPeca.WHITE, tabuleiro));
+        adicionarNovaPeca('b', 8, new Torre(CorPeca.BLACK, tabuleiro));
+        adicionarNovaPeca('a', 8, new Rei(CorPeca.BLACK, tabuleiro));
 
-        adicionarNovaPeca('a', 8, new Torre(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('e', 8, new Rei(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('d', 8, new Rainha(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('h', 8, new Torre(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('c', 8, new Bispo(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('f', 8, new Bispo(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('b', 8, new Cavalo(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('g', 8, new Cavalo(CorPeca.BLACK, tabuleiro));
-
-        adicionarNovaPeca('a', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('b', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('c', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('d', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('e', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('f', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('g', 7, new Peao(CorPeca.BLACK, tabuleiro));
-        adicionarNovaPeca('h', 7, new Peao(CorPeca.BLACK, tabuleiro));
-
+//        adicionarNovaPeca('a', 1, new Torre(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('e', 1, new Rei(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('d', 1, new Rainha(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('h', 1, new Torre(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('c', 1, new Bispo(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('f', 1, new Bispo(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('b', 1, new Cavalo(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('g', 1, new Cavalo(CorPeca.WHITE, tabuleiro));
+//
+//        adicionarNovaPeca('a', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('b', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('c', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('d', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('e', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('f', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('g', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//        adicionarNovaPeca('h', 2, new Peao(CorPeca.WHITE, tabuleiro));
+//
+//        adicionarNovaPeca('a', 8, new Torre(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('e', 8, new Rei(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('d', 8, new Rainha(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('h', 8, new Torre(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('c', 8, new Bispo(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('f', 8, new Bispo(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('b', 8, new Cavalo(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('g', 8, new Cavalo(CorPeca.BLACK, tabuleiro));
+//
+//        adicionarNovaPeca('a', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('b', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('c', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('d', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('e', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('f', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('g', 7, new Peao(CorPeca.BLACK, tabuleiro));
+//        adicionarNovaPeca('h', 7, new Peao(CorPeca.BLACK, tabuleiro));
     }
 }
